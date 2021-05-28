@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>edu.usfca.cs</groupId>
 		<artifactId>cs212</artifactId>
-		<version>2021-01</version>
+		<version>2021-06</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
