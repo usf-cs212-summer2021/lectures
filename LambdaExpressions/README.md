@@ -16,9 +16,9 @@ The following official [Java Tutorials](http://docs.oracle.com/javase/tutorial/i
 
 - [The Java Tutorials - Lesson: Classes and Objects - Lambda Expressions](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)
 
-The following resources from the [Java API](https://docs.oracle.com/en/java/javase/15/docs/api/index.html) may be useful:
+The following resources from the [Java API](https://www.cs.usfca.edu/~cs212/javadoc/api/index.html) may be useful:
 
-- [Package java.util.function](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/function/package-summary.html)
+- [Package java.util.function](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/util/function/package-summary.html)
 
 The following resources from the [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se15/html/index.html) may be useful:
 

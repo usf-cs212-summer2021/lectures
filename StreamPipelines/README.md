@@ -16,7 +16,7 @@ The following official [Java Tutorials](http://docs.oracle.com/javase/tutorial/i
 
 - [The Java Tutorials - Lesson: Aggregate Operations](https://docs.oracle.com/javase/tutorial/collections/streams/index.html)
 
-The following resources from the [Java API](https://docs.oracle.com/en/java/javase/15/docs/api/index.html) may be useful:
+The following resources from the [Java API](https://www.cs.usfca.edu/~cs212/javadoc/api/index.html) may be useful:
 
-- [Package java.util.stream](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/stream/package-summary.html)
+- [Package java.util.stream](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/util/stream/package-summary.html)
 

@@ -12,13 +12,13 @@ The following official [Java Tutorials](http://docs.oracle.com/javase/tutorial/i
 
 :warning: The Java Tutorials are written for Java 8. They are still relevant, but may not reflect the latest features in Java 15.
 
-The following classes from the [Java API](https://docs.oracle.com/en/java/javase/15/docs/api/) may be useful:
+The following classes from the [Java API](https://www.cs.usfca.edu/~cs212/javadoc/api/) may be useful:
 
-- [Files](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/nio/file/Files.html)
-- [Path](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/nio/file/Path.html)
-- [Paths](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/nio/file/Paths.html)
-- [DirectoryStream](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/nio/file/DirectoryStream.html)
-- [BufferedReader](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/io/BufferedReader.html)
-- [BufferedWriter](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/io/BufferedWriter.html)
-- [Exception](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/Exception.html)
-- [RuntimeException](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/RuntimeException.html)
+- [Files](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/nio/file/Files.html)
+- [Path](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/nio/file/Path.html)
+- [Paths](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/nio/file/Paths.html)
+- [DirectoryStream](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/nio/file/DirectoryStream.html)
+- [BufferedReader](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/io/BufferedReader.html)
+- [BufferedWriter](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/io/BufferedWriter.html)
+- [Exception](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/lang/Exception.html)
+- [RuntimeException](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/lang/RuntimeException.html)

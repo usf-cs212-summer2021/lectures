@@ -13,9 +13,9 @@ The following documentation may be useful:
 
 - [Glossary of Terms](https://docs.oracle.com/javase/tutorial/information/glossary.html)
 
-The following classes from the [Java API](https://docs.oracle.com/en/java/javase/15/docs/api/index.html) may be useful:
+The following classes from the [Java API](https://www.cs.usfca.edu/~cs212/javadoc/api/index.html) may be useful:
 
-- [Object](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/Object.html)
-- [System](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/System.html)
-- [String](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/String.html)
-- [StringBuilder](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/StringBuilder.html)
+- [Object](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/lang/Object.html)
+- [System](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/lang/System.html)
+- [String](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/lang/String.html)
+- [StringBuilder](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/lang/StringBuilder.html)

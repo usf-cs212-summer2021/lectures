@@ -16,11 +16,11 @@ The following official [Java Tutorials](http://docs.oracle.com/javase/tutorial/i
 
 - [The Java Tutorials - Lesson: Concurrency](https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html)
 
-The following resources from the [Java API](https://docs.oracle.com/en/java/javase/15/docs/api/index.html) may be useful:
+The following resources from the [Java API](https://www.cs.usfca.edu/~cs212/javadoc/api/index.html) may be useful:
 
-- [Executor](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/concurrent/Executor.html)
-- [ThreadPoolExecutor](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html)
-- [AtomicInteger](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html)
+- [Executor](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/util/concurrent/Executor.html)
+- [ThreadPoolExecutor](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/util/concurrent/ThreadPoolExecutor.html)
+- [AtomicInteger](https://www.cs.usfca.edu/~cs212/javadoc/api/java.base/java/util/concurrent/atomic/AtomicInteger.html)
 
 The following resources from the [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se15/html/index.html) may be useful:
 
