@@ -123,39 +123,41 @@ public class ConcurrentWorkQueue {
 		public void run() {
 			Runnable r = null;
 
-			while (true) {
-				lock.lock();
+			try {
+				while (true) {
+					lock.lock();
 
-				try {
-					while (queue.isEmpty() && !shutdown) {
-						hasWork.await();
+					try {
+						while (queue.isEmpty() && !shutdown) {
+							hasWork.await();
+						}
+		
+						// exit while for one of two reasons:
+						// (a) queue has work, or (b) shutdown has been called
+	
+						if (shutdown) {
+							break;
+						}
+						else {
+							r = queue.removeFirst();
+						}
 					}
-
-					// exit while for one of two reasons:
-					// (a) queue has work, or (b) shutdown has been called
-
-					if (shutdown) {
-						break;
+					finally {
+						lock.unlock();
 					}
-					else {
-						r = queue.removeFirst();
+	
+					try {
+						r.run();
+					}
+					catch (RuntimeException ex) {
+						// catch runtime exceptions to avoid leaking threads
+						System.err.println("Warning: Work queue encountered an exception while running.");
 					}
 				}
-				catch (InterruptedException e) {
-					System.err.println("Warning: Work queue interrupted while waiting.");
-					Thread.currentThread().interrupt();
-				}
-				finally {
-					lock.unlock();
-				}
-
-				try {
-					r.run();
-				}
-				catch (RuntimeException ex) {
-					// catch runtime exceptions to avoid leaking threads
-					System.err.println("Warning: Work queue encountered an exception while running.");
-				}
+			}
+			catch (InterruptedException e) {
+				System.err.println("Warning: Work queue interrupted while waiting.");
+				Thread.currentThread().interrupt();
 			}
 		}
 	}
