@@ -1,6 +1,12 @@
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
 
 /**
  * A thread-safe version of {@link IndexedSet} using a read/write lock.
@@ -57,6 +63,18 @@ public class ConcurrentSet<E> extends IndexedSet<E> {
 			lock.writeLock().unlock();
 		}
 	}
+	
+	@Override
+	public boolean addAll(IndexedSet<E> elements) {
+		lock.writeLock().lock();
+
+		try {
+			return super.addAll(elements);
+		}
+		finally {
+			lock.writeLock().unlock();
+		}
+	}
 
 	@Override
 	public int size() {
@@ -93,6 +111,42 @@ public class ConcurrentSet<E> extends IndexedSet<E> {
 			lock.readLock().unlock();
 		}
 	}
+	
+	@Override
+	public E first() throws NoSuchElementException {
+		lock.readLock().lock();
+
+		try {
+			return super.first();
+		}
+		finally {
+			lock.readLock().unlock();
+		}
+	}
+	
+	@Override
+	public E last() throws NoSuchElementException {
+		lock.readLock().lock();
+
+		try {
+			return super.last();
+		}
+		finally {
+			lock.readLock().unlock();
+		}
+	}	
+
+	@Override
+	public IndexedSet<E> copy(boolean sorted) {
+		lock.readLock().lock();
+	
+		try {
+			return super.copy(sorted);
+		}
+		finally {
+			lock.readLock().unlock();
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -106,27 +160,34 @@ public class ConcurrentSet<E> extends IndexedSet<E> {
 		}
 	}
 
-	@Override
-	public IndexedSet<E> unsortedCopy() {
-		lock.readLock().lock();
+	/**
+	 * Demonstrates this class.
+	 * 
+	 * @param args unused
+	 */
+	public static void main(String[] args) {
+		Method[] singleMethods = IndexedSet.class.getDeclaredMethods();
+		Method[] threadMethods = ConcurrentSet.class.getDeclaredMethods();
+				
+		List<String> expected = Arrays.stream(singleMethods)
+				.filter(method -> Modifier.isPublic(method.getModifiers()))
+				.filter(method -> !Modifier.isStatic(method.getModifiers()))
+				.map(method -> method.getName())
+				.sorted()
+				.collect(Collectors.toList());
 
-		try {
-			return super.unsortedCopy();
-		}
-		finally {
-			lock.readLock().unlock();
-		}
-	}
-
-	@Override
-	public IndexedSet<E> sortedCopy() {
-		lock.readLock().lock();
-
-		try {
-			return super.sortedCopy();
-		}
-		finally {
-			lock.readLock().unlock();
-		}
-	}
+		List<String> actual = Arrays.stream(threadMethods)
+				.filter(method -> Modifier.isPublic(method.getModifiers()))
+				.filter(method -> !Modifier.isStatic(method.getModifiers()))
+				.map(method -> method.getName())
+				.sorted()
+				.collect(Collectors.toList());
+		
+		System.out.println("Original Methods:");
+		System.out.println(expected);
+		
+		System.out.println();
+		System.out.println("Overridden Methods:");
+		System.out.println(actual);
+	}	
 }

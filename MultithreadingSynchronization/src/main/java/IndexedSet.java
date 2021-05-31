@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -14,7 +15,6 @@ import java.util.TreeSet;
  * @param <E> element type sorted in set
  */
 public class IndexedSet<E> {
-
 	/** Set of elements */
 	private final Set<E> set;
 
@@ -66,6 +66,18 @@ public class IndexedSet<E> {
 	}
 
 	/**
+	 * Adds values from one {@link IndexedSet} to another.
+	 *
+	 * @param elements elements to add
+	 * @return true if any elements were added (false if were all duplicates)
+	 *
+	 * @see Set#addAll(Collection)
+	 */
+	public boolean addAll(IndexedSet<E> elements) {
+		return set.addAll(elements.set);
+	}
+
+	/**
 	 * Returns the number of elements in our set.
 	 *
 	 * @return number of elements
@@ -94,8 +106,9 @@ public class IndexedSet<E> {
 	 *
 	 * @param index index of element to get
 	 * @return element at the specified index or null of the index was invalid
+	 * @throws IndexOutOfBoundsException if index is out of bounds
 	 */
-	public E get(int index) {
+	public E get(int index) throws IndexOutOfBoundsException {
 		if (index < 0 || index >= set.size()) {
 			throw new IndexOutOfBoundsException(index);
 		}
@@ -103,35 +116,59 @@ public class IndexedSet<E> {
 		return set.stream().skip(index).findFirst().get();
 	}
 
-	@Override
-	public String toString() {
-		return set.toString();
+	/**
+	 * Gets the first element if it exists.
+	 * 
+	 * @return first element
+	 * @throws NoSuchElementException if no first element
+	 * 
+	 * @see #get(int)
+	 */
+	public E first() throws NoSuchElementException {
+		checkEmpty();
+		return get(0);
+	}
+
+	/**
+	 * Gets the last element if it exists.
+	 * 
+	 * @return last element
+	 * @throws NoSuchElementException if no last element
+	 * 
+	 * @see #get(int)
+	 */
+	public E last() throws NoSuchElementException {
+		checkEmpty();
+		return get(set.size() - 1);
+	}
+
+	/**
+	 * Throws an exception if the set is empty.
+	 * 
+	 * @throws NoSuchElementException if empty.
+	 */
+	private void checkEmpty() throws NoSuchElementException {
+		if (set.isEmpty()) {
+			throw new NoSuchElementException();
+		}
 	}
 
 	/**
 	 * Returns an unsorted copy of this set.
 	 *
 	 * @return unsorted copy
-	 *
-	 * @see HashSet#HashSet(Collection)
 	 */
 	public IndexedSet<E> unsortedCopy() {
-		IndexedSet<E> copy = new IndexedSet<>(false);
-		copy.addAll(set);
-		return copy;
+		return copy(false);
 	}
 
 	/**
 	 * Returns a sorted copy of this set.
 	 *
 	 * @return sorted copy
-	 *
-	 * @see TreeSet#TreeSet(Collection)
 	 */
 	public IndexedSet<E> sortedCopy() {
-		IndexedSet<E> copy = new IndexedSet<>(true);
-		copy.addAll(set);
-		return copy;
+		return copy(true);
 	}
 
 	/**
@@ -142,7 +179,14 @@ public class IndexedSet<E> {
 	 *         otherwise an unsorted copy of the indexed set
 	 */
 	public IndexedSet<E> copy(boolean sorted) {
-		return sorted ? sortedCopy() : unsortedCopy();
+		IndexedSet<E> copy = new IndexedSet<>(sorted);
+		copy.addAll(set);
+		return copy;
+	}
+
+	@Override
+	public String toString() {
+		return set.toString();
 	}
 
 	/**
@@ -166,6 +210,12 @@ public class IndexedSet<E> {
 		System.out.println(unsorted);
 		System.out.println(unsorted.sortedCopy());
 
+		System.out.println(sorted.first());
+		System.out.println(unsorted.first());
+		
+		System.out.println(sorted.last());
+		System.out.println(unsorted.last());
+		
 		System.out.println(sorted.get(0));
 		System.out.println(unsorted.get(0));
 

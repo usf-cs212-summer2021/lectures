@@ -1,4 +1,10 @@
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * A thread-safe version of {@link IndexedSet} using the synchronized keyword.
@@ -34,6 +40,11 @@ public class SynchronizedSet<E> extends IndexedSet<E> {
 	public synchronized boolean addAll(Collection<E> elements) {
 		return super.addAll(elements);
 	}
+	
+	@Override
+	public synchronized boolean addAll(IndexedSet<E> elements) {
+		return super.addAll(elements);
+	}
 
 	@Override
 	public synchronized int size() {
@@ -49,23 +60,30 @@ public class SynchronizedSet<E> extends IndexedSet<E> {
 	public synchronized E get(int index) {
 		return super.get(index);
 	}
+	
+	// Must override because of checkEmpty calls
+	
+	@Override
+	public synchronized E first() throws NoSuchElementException {
+		return super.first();
+	}
+	
+	@Override
+	public synchronized E last() throws NoSuchElementException {
+		return super.last();
+	}
+	
+	// Do not need to @Override un/sortedCopy because ONLY calls copy
+
+	@Override
+	public synchronized IndexedSet<E> copy(boolean sorted) {
+		return super.copy(sorted);
+	}
 
 	@Override
 	public synchronized String toString() {
 		return super.toString();
 	}
-
-	@Override
-	public synchronized IndexedSet<E> unsortedCopy() {
-		return super.unsortedCopy();
-	}
-
-	@Override
-	public synchronized IndexedSet<E> sortedCopy() {
-		return super.sortedCopy();
-	}
-
-	// Do not need to override copy(boolean) because it does not directly access data!
 
 	/*
 	 * Because this class uses synchronized methods instead of a private object
@@ -74,4 +92,34 @@ public class SynchronizedSet<E> extends IndexedSet<E> {
 	 * a deadlock to occur). If properly used as a private member without breaking
 	 * encapsulation, it should be fine.
 	 */
+	
+	/**
+	 * Demonstrates this class.
+	 * 
+	 * @param args unused
+	 */
+	public static void main(String[] args) {
+		Method[] singleMethods = IndexedSet.class.getDeclaredMethods();
+		Method[] threadMethods = SynchronizedSet.class.getDeclaredMethods();
+				
+		List<String> expected = Arrays.stream(singleMethods)
+				.filter(method -> Modifier.isPublic(method.getModifiers()))
+				.filter(method -> !Modifier.isStatic(method.getModifiers()))
+				.map(method -> method.getName())
+				.sorted()
+				.collect(Collectors.toList());
+
+		List<String> actual = Arrays.stream(threadMethods)
+				.filter(method -> Modifier.isSynchronized(method.getModifiers()))
+				.map(method -> method.getName())
+				.sorted()
+				.collect(Collectors.toList());
+		
+		System.out.println("Original Methods:");
+		System.out.println(expected);
+		
+		System.out.println();
+		System.out.println("Synchronized Methods:");
+		System.out.println(actual);
+	}
 }
